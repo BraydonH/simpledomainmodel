@@ -92,7 +92,9 @@ open class Person {
   open var job : Job? {
     get { return _job }
     set(value) {
-      _job = value
+      if (age > 18) {
+        _job = value
+      }
     }
   }
   
@@ -100,7 +102,9 @@ open class Person {
   open var spouse : Person? {
     get { return _spouse }
     set(value) {
-      _spouse = value
+      if (age > 18) {
+        _spouse = value
+      }
     }
   }
   
@@ -111,25 +115,39 @@ open class Person {
   }
   
   open func toString() -> String {
-    return "[Person: firstName:\(firstName) lastName:\(lastName) age:\(age) job:\(_job) spouse:\(_spouse)"
+    return "[Person: firstName:\(firstName) lastName:\(lastName) age:\(age) job:\(_job) spouse:\(_spouse)]"
   }
 }
 
 ////////////////////////////////////
 // Family
-//
-//open class Family {
-//  fileprivate var members : [Person] = []
-//  
-//  public init(spouse1: Person, spouse2: Person) {
-//  }
-//  
-//  open func haveChild(_ child: Person) -> Bool {
-//  }
-//  
-//  open func householdIncome() -> Int {
-//  }
-//}
+
+open class Family {
+  fileprivate var members : [Person] = []
+  
+  public init(spouse1: Person, spouse2: Person) {
+    members.append(spouse1)
+    members.append(spouse2)
+  }
+  
+  open func haveChild(_ child: Person) -> Bool {
+    if members.contains(where: { $0.firstName == child.firstName && $0.lastName == child.lastName && $0.age == child.age}) {
+      return true
+    }
+    members.append(child)
+    return false
+  }
+  
+  open func householdIncome() -> Int {
+    var income = 0
+    for member in members {
+      if let i = member.job?.calculateIncome(2000) {
+        income += i
+      }
+    }
+    return income
+  }
+}
 
 
 
