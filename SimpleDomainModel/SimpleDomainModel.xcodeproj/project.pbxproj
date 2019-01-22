@@ -148,6 +148,7 @@
 					};
 					FE6891211CB5D90B0018C340 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = B47AVVU489;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -313,6 +314,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = B47AVVU489;
 				INFOPLIST_FILE = SimpleDomainModelTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.ischool.SimpleDomainModelTests;
@@ -325,6 +327,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = B47AVVU489;
 				INFOPLIST_FILE = SimpleDomainModelTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.ischool.SimpleDomainModelTests;

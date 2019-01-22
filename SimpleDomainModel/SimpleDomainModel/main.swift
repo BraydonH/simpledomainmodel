@@ -26,7 +26,7 @@ open class TestMe {
 public struct Money {
   public var amount : Int
   public var currency : String
-  private static var exchanges = ["US": 1.0, "CAN": 1.25, "GBP": 0.5, "EUR": 1.5]
+  private static var exchanges = ["USD": 1.0, "CAN": 1.25, "GBP": 0.5, "EUR": 1.5]
   
   public func convert(_ to: String) -> Money {
     let m = Int(Double(amount) * (Money.exchanges[to]! / Money.exchanges[currency]!))
@@ -73,9 +73,9 @@ open class Job {
   open func raise(_ amt : Double) {
     switch type {
     case .Hourly(let h):
-      type = Job.JobType.Hourly(h * amt)
+      type = Job.JobType.Hourly(h + amt)
     case .Salary(let s):
-      type = Job.JobType.Salary(Int(Double(s) * amt))
+      type = Job.JobType.Salary(Int(Double(s) + amt))
     }
   }
 }
@@ -83,38 +83,41 @@ open class Job {
 ////////////////////////////////////
 // Person
 //
-//open class Person {
-//  open var firstName : String = ""
-//  open var lastName : String = ""
-//  open var age : Int = 0
+open class Person {
+  open var firstName : String = ""
+  open var lastName : String = ""
+  open var age : Int = 0
+
+  fileprivate var _job : Job? = nil
+  open var job : Job? {
+    get { return _job }
+    set(value) {
+      _job = value
+    }
+  }
+  
+  fileprivate var _spouse : Person? = nil
+  open var spouse : Person? {
+    get { return _spouse }
+    set(value) {
+      _spouse = value
+    }
+  }
+  
+  public init(firstName : String, lastName: String, age : Int) {
+    self.firstName = firstName
+    self.lastName = lastName
+    self.age = age
+  }
+  
+  open func toString() -> String {
+    return "[Person: firstName:\(firstName) lastName:\(lastName) age:\(age) job:\(_job) spouse:\(_spouse)"
+  }
+}
+
+////////////////////////////////////
+// Family
 //
-//  fileprivate var _job : Job? = nil
-//  open var job : Job? {
-//    get { }
-//    set(value) {
-//    }
-//  }
-//  
-//  fileprivate var _spouse : Person? = nil
-//  open var spouse : Person? {
-//    get { }
-//    set(value) {
-//    }
-//  }
-//  
-//  public init(firstName : String, lastName: String, age : Int) {
-//    self.firstName = firstName
-//    self.lastName = lastName
-//    self.age = age
-//  }
-//  
-//  open func toString() -> String {
-//  }
-//}
-//
-//////////////////////////////////////
-//// Family
-////
 //open class Family {
 //  fileprivate var members : [Person] = []
 //  
@@ -127,8 +130,8 @@ open class Job {
 //  open func householdIncome() -> Int {
 //  }
 //}
-//
-//
-//
-//
-//
+
+
+
+
+
