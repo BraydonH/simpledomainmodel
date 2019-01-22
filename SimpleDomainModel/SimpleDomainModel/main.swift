@@ -128,14 +128,19 @@ open class Family {
   public init(spouse1: Person, spouse2: Person) {
     members.append(spouse1)
     members.append(spouse2)
+    spouse1.spouse = spouse2
+    spouse2.spouse = spouse1
   }
   
   open func haveChild(_ child: Person) -> Bool {
+    if !(members[1].age > 20 || members[0].age > 20) {
+      return false
+    }
     if members.contains(where: { $0.firstName == child.firstName && $0.lastName == child.lastName && $0.age == child.age}) {
-      return true
+      return false
     }
     members.append(child)
-    return false
+    return true
   }
   
   open func householdIncome() -> Int {
