@@ -26,13 +26,21 @@ open class TestMe {
 public struct Money {
   public var amount : Int
   public var currency : String
+  private static var exchanges = ["US": 1.0, "CAN": 1.25, "GBP": 0.5, "EUR": 1.5]
   
   public func convert(_ to: String) -> Money {
+    let m = Int(Double(amount) * (Money.exchanges[to]! / Money.exchanges[currency]!))
+    return Money(amount: m, currency: to)
   }
   
   public func add(_ to: Money) -> Money {
+    let convertedSelf = self.convert(to.currency)
+    return Money(amount: to.amount + convertedSelf.amount, currency: to.currency)
   }
+  
   public func subtract(_ from: Money) -> Money {
+    let convertedSelf = self.convert(from.currency)
+    return Money(amount: from.amount - convertedSelf.amount, currency: from.currency)
   }
 }
 
